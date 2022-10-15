@@ -1,12 +1,17 @@
 let array = [
     [false, false, false, false],
-    [false, true, true, false],
-    [true, false, false, false],
+    [false, true, false, false],
+    [false, true, false, false],
+    [false, true, false, false],
+    [false, false, false, false],
+];
+let arrayResult = [
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
 ];
-let arrayResult = [[]];
-
 const gameOfLife = () => {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array[j].length; j++) {
@@ -14,9 +19,6 @@ const gameOfLife = () => {
                 let count = 0;
                 // esquina arriba izquierda
                 if (i === 0 && j === 0) {
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -28,15 +30,14 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count >= 3) {
-                        array[i][j] = true;
-                        count = 0;
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
                     }
                 }
                 // esquina abajo izquierda
                 if (i === array[i].length - 1 && j === 0) {
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -48,16 +49,15 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count >= 3) {
-                        array[i][j] = true;
-                        count = 0;
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
                     }
                 }
                 // esquina arriba derecha
                 if (i === 0 && j === array[j].length - 1) {
                     if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i][j] === true) {
                         count += 1;
                     }
                     if (array[i + 1][j - 1] === true) {
@@ -67,17 +67,16 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count >= 3) {
-                        array[i][j] = true;
-                        count = 0;
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
                     }
                 }
                 // esquina abajo derecha
                 if (i === array[i].length - 1 && j === array[j].length - 1) {
                     debugger;
                     if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i][j] === true) {
                         count += 1;
                     }
                     if (array[i - 1][j - 1] === true) {
@@ -87,17 +86,16 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count >= 3) {
-                        array[i][j] = true;
-                        count = 0;
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
                     }
                 }
                 // fila arriba
                 if (i === 0 && j > 0) {
                     if (j < array[j].length) {
                         if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j] === true) {
                             count += 1;
                         }
                         if (array[i][j + 1] === true) {
@@ -113,8 +111,10 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count >= 3) {
-                            array[i][j] = true;
-                            count = 0;
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
                         }
                     }
                 }
@@ -124,9 +124,6 @@ const gameOfLife = () => {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
                         if (array[i + 1][j - 1] === true) {
                             count += 1;
                         }
@@ -140,8 +137,10 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count >= 3) {
-                            array[i][j] = true;
-                            count = 0;
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
                         }
                     }
                 }
@@ -149,9 +148,6 @@ const gameOfLife = () => {
                 if (i === array[i].length - 1 && j > 0) {
                     if (j < array[j].length) {
                         if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j] === true) {
                             count += 1;
                         }
                         if (array[i][j + 1] === true) {
@@ -167,17 +163,16 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count >= 3) {
-                            array[i][j] = true;
-                            count = 0;
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
                         }
                     }
                 }
                 // columna izquierda
                 if (i > 0 && j === 0) {
                     if (i < array[i].length) {
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -194,8 +189,10 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count >= 3) {
-                            array[i][j] = true;
-                            count = 0;
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
                         }
                     }
                 }
@@ -205,9 +202,6 @@ const gameOfLife = () => {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -230,8 +224,10 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count >= 3) {
-                            array[i][j] = true;
-                            count = 0;
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
                         }
                     }
                 }
@@ -240,9 +236,6 @@ const gameOfLife = () => {
                 let count = 0;
                 // esquina arriba izquierda
                 if (i === 0 && j === 0) {
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -254,19 +247,17 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count > 3) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
                     }
                     if (count < 2) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
                     }
                 }
                 // esquina abajo izquierda
                 if (i === array[i].length - 1 && j === 0) {
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -278,12 +269,13 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count > 3) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
                     }
                     if (count < 2) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
                     }
                 }
                 // esquina arriba derecha
@@ -291,9 +283,7 @@ const gameOfLife = () => {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
+
                     if (array[i + 1][j - 1] === true) {
                         count += 1;
                     }
@@ -301,12 +291,13 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count > 3) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
                     }
                     if (count < 2) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
                     }
                 }
                 // esquina abajo derecha
@@ -314,9 +305,7 @@ const gameOfLife = () => {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
-                    if (array[i][j] === true) {
-                        count += 1;
-                    }
+
                     if (array[i - 1][j - 1] === true) {
                         count += 1;
                     }
@@ -324,12 +313,13 @@ const gameOfLife = () => {
                         count += 1;
                     }
                     if (count > 3) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
                     }
                     if (count < 2) {
-                        array[i][j] = false;
-                        count = 0;
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
                     }
                 }
                 // fila arriba
@@ -338,9 +328,7 @@ const gameOfLife = () => {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
+
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -354,12 +342,13 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count > 3) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
                         }
                         if (count < 2) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
                         }
                     }
                 }
@@ -369,9 +358,7 @@ const gameOfLife = () => {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
+
                         if (array[i + 1][j - 1] === true) {
                             count += 1;
                         }
@@ -385,12 +372,13 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count > 3) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
                         }
                         if (count < 2) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
                         }
                     }
                 }
@@ -398,9 +386,6 @@ const gameOfLife = () => {
                 if (i === array[i].length - 1 && j > 0) {
                     if (j < array[j].length) {
                         if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j] === true) {
                             count += 1;
                         }
                         if (array[i][j + 1] === true) {
@@ -416,21 +401,19 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count > 3) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
                         }
                         if (count < 2) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
                         }
                     }
                 }
                 // columna izquierda
                 if (i > 0 && j === 0) {
                     if (i < array[i].length) {
-                        if (array[i][j] === true) {
-                            count += 1;
-                        }
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -447,12 +430,13 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count > 3) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
                         }
                         if (count < 2) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
                         }
                     }
                 }
@@ -485,18 +469,21 @@ const gameOfLife = () => {
                             count += 1;
                         }
                         if (count > 3) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
                         }
                         if (count < 2) {
-                            array[i][j] = false;
-                            count = 0;
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
                         }
                     }
                 }
             }
         }
     }
+    array = arrayResult;
+
     console.table(array);
 };
 const repeating = setInterval(gameOfLife, 1000);
