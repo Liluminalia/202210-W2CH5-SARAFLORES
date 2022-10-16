@@ -1,24 +1,3 @@
-import { centerFalse, centerTrue } from './modules/centerFunctions';
-import {
-    downLeftFalse,
-    upLeftFalse,
-    upRightFalse,
-    downRightFalse,
-    downLeftTrue,
-    upRightTrue,
-    downRightTrue,
-} from './modules/cornerFunctions';
-import {
-    downTrue,
-    leftTrue,
-    topFalse,
-    topTrue,
-    rightTrue,
-    rightFalse,
-    downFalse,
-    leftFalse,
-} from './modules/squareFunctions';
-
 let array = [
     [false, false, false, false],
     [false, true, false, false],
@@ -33,56 +12,481 @@ let arrayResult = [
     [false, false, false, false],
     [false, false, false, false],
 ];
+
 const gameOfLife = () => {
-    for (let i = 0; i < array[i].length; i++) {
-        for (let j = 0; j < array[j].length; j++) {
+    for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array[i].length; j++) {
             if (array[i][j] === false) {
                 let count = 0;
                 // esquina arriba izquierda
-                upLeftFalse();
-                debugger;
+                if (i === 0 && j === 0) {
+                    if (array[i][j + 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i + 1][j] === true) {
+                        count += 1;
+                    }
+                    if (array[i + 1][j + 1] === true) {
+                        count += 1;
+                    }
+                    if (count >= 3) {
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
+                    }
+                }
                 // esquina abajo izquierda
-                downLeftFalse();
+                if (i === array.length - 1 && j === 0) {
+                    if (array[i][j + 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i - 1][j] === true) {
+                        count += 1;
+                    }
+                    if (array[i - 1][j + 1] === true) {
+                        count += 1;
+                    }
+                    if (count >= 3) {
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
+                    }
+                }
                 // esquina arriba derecha
-                upRightFalse();
+                if (i === 0 && j === array[i].length - 1) {
+                    if (array[i][j - 1] === true) {
+                        count += 1;
+                    }
+                    if (array[i + 1][j - 1] === true) {
+                        count += 1;
+                    }
+                    if (array[i + 1][j] === true) {
+                        count += 1;
+                    }
+                    if (count >= 3) {
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
+                    }
+                }
                 // esquina abajo derecha
-                downRightFalse();
+                if (i === array.length - 1 && j === array[i].length - 1) {
+                    if (array[i][j - 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i - 1][j - 1] === true) {
+                        count += 1;
+                    }
+                    if (array[i - 1][j] === true) {
+                        count += 1;
+                    }
+                    if (count >= 3) {
+                        arrayResult[i][j] = true;
+                    }
+                    if (count < 3) {
+                        arrayResult[i][j] = false;
+                    }
+                }
                 // fila arriba
-                topFalse();
+                if (i === 0 && j > 0) {
+                    if (j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count >= 3) {
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
+                        }
+                    }
+                }
                 // columna derecha
-                rightFalse();
+                if (i > 0 && j === array[i].length - 1) {
+                    if (i < array.length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (count >= 3) {
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
+                        }
+                    }
+                }
                 // fila abajo
-                downFalse();
+                if (i === array.length - 1 && j > 0) {
+                    if (j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count >= 3) {
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
+                        }
+                    }
+                }
                 // columna izquierda
-                leftFalse();
+                if (i > 0 && j === 0) {
+                    if (i < array.length - 1) {
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count >= 3) {
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
+                        }
+                    }
+                }
                 // centro
-                centerFalse();
+                if (i > 0 && j > 0) {
+                    if (i < array.length - 1 && j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        debugger;
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count >= 3) {
+                            arrayResult[i][j] = true;
+                        }
+                        if (count < 3) {
+                            arrayResult[i][j] = false;
+                        }
+                    }
+                }
             }
             if (array[i][j] === true) {
                 let count = 0;
                 // esquina arriba izquierda
-                upLeftTrue();
+                if (i === 0 && j === 0) {
+                    if (array[i][j + 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i + 1][j] === true) {
+                        count += 1;
+                    }
+                    if (array[i + 1][j + 1] === true) {
+                        count += 1;
+                    }
+                    if (count > 3) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count < 2) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
+                    }
+                }
                 // esquina abajo izquierda
-                downLeftTrue();
+                if (i === array.length - 1 && j === 0) {
+                    if (array[i][j + 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i - 1][j] === true) {
+                        count += 1;
+                    }
+                    if (array[i - 1][j + 1] === true) {
+                        count += 1;
+                    }
+                    if (count > 3) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count < 2) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
+                    }
+                }
                 // esquina arriba derecha
-                upRightTrue();
+                if (i === 0 && j === array[i].length - 1) {
+                    if (array[i][j - 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i + 1][j - 1] === true) {
+                        count += 1;
+                    }
+                    if (array[i + 1][j] === true) {
+                        count += 1;
+                    }
+                    if (count > 3) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count < 2) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
+                    }
+                }
                 // esquina abajo derecha
-                downRightTrue();
+                if (i === array.length - 1 && j === array[i].length - 1) {
+                    if (array[i][j - 1] === true) {
+                        count += 1;
+                    }
+
+                    if (array[i - 1][j - 1] === true) {
+                        count += 1;
+                    }
+                    if (array[i - 1][j] === true) {
+                        count += 1;
+                    }
+                    if (count > 3) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count < 2) {
+                        arrayResult[i][j] = false;
+                    }
+                    if (count === 2 || count === 3) {
+                        arrayResult[i][j] = true;
+                    }
+                }
                 // fila arriba
-                topTrue();
+                if (i === 0 && j > 0) {
+                    if (j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count > 3) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count < 2) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
+                        }
+                    }
+                }
                 // columna derecha
-                rightTrue();
+                if (i > 0 && j === array[i].length - 1) {
+                    if (i < array.length) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (count > 3) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count < 2) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
+                        }
+                    }
+                }
                 // fila abajo
-                downTrue();
+                if (i === array.length - 1 && j > 0) {
+                    if (j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count > 3) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count < 2) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
+                        }
+                    }
+                }
                 // columna izquierda
-                leftTrue();
+                if (i > 0 && j === 0) {
+                    if (i < array.length) {
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count > 3) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count < 2) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
+                        }
+                    }
+                }
                 // centro
-                centerTrue();
+                if (i > 0 && j > 0) {
+                    if (i < array.length - 1 && j < array[i].length - 1) {
+                        if (array[i][j - 1] === true) {
+                            count += 1;
+                        }
+                        debugger;
+                        if (array[i][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i + 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j - 1] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j] === true) {
+                            count += 1;
+                        }
+                        if (array[i - 1][j + 1] === true) {
+                            count += 1;
+                        }
+                        if (count > 3) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count < 2) {
+                            arrayResult[i][j] = false;
+                        }
+                        if (count === 2 || count === 3) {
+                            arrayResult[i][j] = true;
+                        }
+                    }
+                }
             }
         }
     }
     array = arrayResult;
 
-    console.table(array);
+    return array;
 };
+
 const repeating = setInterval(gameOfLife, 1000);
