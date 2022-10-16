@@ -12,9 +12,10 @@ let arrayResult = [
     [false, false, false, false],
     [false, false, false, false],
 ];
+
 const gameOfLife = () => {
     for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[j].length; j++) {
+        for (let j = 0; j < array[i].length; j++) {
             if (array[i][j] === false) {
                 let count = 0;
                 // esquina arriba izquierda
@@ -37,7 +38,7 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina abajo izquierda
-                if (i === array[i].length - 1 && j === 0) {
+                if (i === array.length - 1 && j === 0) {
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -56,7 +57,7 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina arriba derecha
-                if (i === 0 && j === array[j].length - 1) {
+                if (i === 0 && j === array[i].length - 1) {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
@@ -74,11 +75,11 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina abajo derecha
-                if (i === array[i].length - 1 && j === array[j].length - 1) {
-                    debugger;
+                if (i === array.length - 1 && j === array[i].length - 1) {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
+
                     if (array[i - 1][j - 1] === true) {
                         count += 1;
                     }
@@ -94,7 +95,7 @@ const gameOfLife = () => {
                 }
                 // fila arriba
                 if (i === 0 && j > 0) {
-                    if (j < array[j].length) {
+                    if (j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -119,8 +120,8 @@ const gameOfLife = () => {
                     }
                 }
                 // columna derecha
-                if (i > 0 && j === array[j].length - 1) {
-                    if (i < array[i].length) {
+                if (i > 0 && j === array[i].length - 1) {
+                    if (i < array.length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -145,8 +146,8 @@ const gameOfLife = () => {
                     }
                 }
                 // fila abajo
-                if (i === array[i].length - 1 && j > 0) {
-                    if (j < array[j].length) {
+                if (i === array.length - 1 && j > 0) {
+                    if (j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -172,7 +173,7 @@ const gameOfLife = () => {
                 }
                 // columna izquierda
                 if (i > 0 && j === 0) {
-                    if (i < array[i].length) {
+                    if (i < array.length - 1) {
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -198,10 +199,11 @@ const gameOfLife = () => {
                 }
                 // centro
                 if (i > 0 && j > 0) {
-                    if (i < array[i].length - 1 && j < array[j].length - 1) {
+                    if (i < array.length - 1 && j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
+                        debugger;
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -257,7 +259,7 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina abajo izquierda
-                if (i === array[i].length - 1 && j === 0) {
+                if (i === array.length - 1 && j === 0) {
                     if (array[i][j + 1] === true) {
                         count += 1;
                     }
@@ -279,7 +281,7 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina arriba derecha
-                if (i === 0 && j === array[j].length - 1) {
+                if (i === 0 && j === array[i].length - 1) {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
@@ -301,7 +303,7 @@ const gameOfLife = () => {
                     }
                 }
                 // esquina abajo derecha
-                if (i === array[i].length - 1 && j === array[j].length - 1) {
+                if (i === array.length - 1 && j === array[i].length - 1) {
                     if (array[i][j - 1] === true) {
                         count += 1;
                     }
@@ -324,7 +326,7 @@ const gameOfLife = () => {
                 }
                 // fila arriba
                 if (i === 0 && j > 0) {
-                    if (j < array[j].length) {
+                    if (j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -353,8 +355,8 @@ const gameOfLife = () => {
                     }
                 }
                 // columna derecha
-                if (i > 0 && j === array[j].length - 1) {
-                    if (i < array[i].length) {
+                if (i > 0 && j === array[i].length - 1) {
+                    if (i < array.length) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -383,8 +385,8 @@ const gameOfLife = () => {
                     }
                 }
                 // fila abajo
-                if (i === array[i].length - 1 && j > 0) {
-                    if (j < array[j].length) {
+                if (i === array.length - 1 && j > 0) {
+                    if (j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -413,7 +415,7 @@ const gameOfLife = () => {
                 }
                 // columna izquierda
                 if (i > 0 && j === 0) {
-                    if (i < array[i].length) {
+                    if (i < array.length) {
                         if (array[i][j + 1] === true) {
                             count += 1;
                         }
@@ -442,7 +444,7 @@ const gameOfLife = () => {
                 }
                 // centro
                 if (i > 0 && j > 0) {
-                    if (i < array[i].length - 1 && j < array[j].length - 1) {
+                    if (i < array.length - 1 && j < array[i].length - 1) {
                         if (array[i][j - 1] === true) {
                             count += 1;
                         }
@@ -486,4 +488,5 @@ const gameOfLife = () => {
 
     console.table(array);
 };
+
 const repeating = setInterval(gameOfLife, 1000);
