@@ -486,7 +486,7 @@ const gameOfLife = () => {
     }
     array = arrayResult;
 
-    console.table(array);
+    return array;
 };
 
 const repeating = setInterval(gameOfLife, 1000);
