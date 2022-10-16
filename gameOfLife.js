@@ -1,3 +1,24 @@
+import { centerFalse, centerTrue } from './modules/centerFunctions';
+import {
+    downLeftFalse,
+    upLeftFalse,
+    upRightFalse,
+    downRightFalse,
+    downLeftTrue,
+    upRightTrue,
+    downRightTrue,
+} from './modules/cornerFunctions';
+import {
+    downTrue,
+    leftTrue,
+    topFalse,
+    topTrue,
+    rightTrue,
+    rightFalse,
+    downFalse,
+    leftFalse,
+} from './modules/squareFunctions';
+
 let array = [
     [false, false, false, false],
     [false, true, false, false],
@@ -13,472 +34,50 @@ let arrayResult = [
     [false, false, false, false],
 ];
 const gameOfLife = () => {
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array[i].length; i++) {
         for (let j = 0; j < array[j].length; j++) {
             if (array[i][j] === false) {
                 let count = 0;
                 // esquina arriba izquierda
-                if (i === 0 && j === 0) {
-                    if (array[i][j + 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i + 1][j] === true) {
-                        count += 1;
-                    }
-                    if (array[i + 1][j + 1] === true) {
-                        count += 1;
-                    }
-                    if (count >= 3) {
-                        arrayResult[i][j] = true;
-                    }
-                    if (count < 3) {
-                        arrayResult[i][j] = false;
-                    }
-                }
+                upLeftFalse();
+                debugger;
                 // esquina abajo izquierda
-                if (i === array[i].length - 1 && j === 0) {
-                    if (array[i][j + 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i - 1][j] === true) {
-                        count += 1;
-                    }
-                    if (array[i - 1][j + 1] === true) {
-                        count += 1;
-                    }
-                    if (count >= 3) {
-                        arrayResult[i][j] = true;
-                    }
-                    if (count < 3) {
-                        arrayResult[i][j] = false;
-                    }
-                }
+                downLeftFalse();
                 // esquina arriba derecha
-                if (i === 0 && j === array[j].length - 1) {
-                    if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i + 1][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i + 1][j] === true) {
-                        count += 1;
-                    }
-                    if (count >= 3) {
-                        arrayResult[i][j] = true;
-                    }
-                    if (count < 3) {
-                        arrayResult[i][j] = false;
-                    }
-                }
+                upRightFalse();
                 // esquina abajo derecha
-                if (i === array[i].length - 1 && j === array[j].length - 1) {
-                    debugger;
-                    if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i - 1][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i - 1][j] === true) {
-                        count += 1;
-                    }
-                    if (count >= 3) {
-                        arrayResult[i][j] = true;
-                    }
-                    if (count < 3) {
-                        arrayResult[i][j] = false;
-                    }
-                }
+                downRightFalse();
                 // fila arriba
-                if (i === 0 && j > 0) {
-                    if (j < array[j].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count >= 3) {
-                            arrayResult[i][j] = true;
-                        }
-                        if (count < 3) {
-                            arrayResult[i][j] = false;
-                        }
-                    }
-                }
+                topFalse();
                 // columna derecha
-                if (i > 0 && j === array[j].length - 1) {
-                    if (i < array[i].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (count >= 3) {
-                            arrayResult[i][j] = true;
-                        }
-                        if (count < 3) {
-                            arrayResult[i][j] = false;
-                        }
-                    }
-                }
+                rightFalse();
                 // fila abajo
-                if (i === array[i].length - 1 && j > 0) {
-                    if (j < array[j].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count >= 3) {
-                            arrayResult[i][j] = true;
-                        }
-                        if (count < 3) {
-                            arrayResult[i][j] = false;
-                        }
-                    }
-                }
+                downFalse();
                 // columna izquierda
-                if (i > 0 && j === 0) {
-                    if (i < array[i].length) {
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count >= 3) {
-                            arrayResult[i][j] = true;
-                        }
-                        if (count < 3) {
-                            arrayResult[i][j] = false;
-                        }
-                    }
-                }
+                leftFalse();
                 // centro
-                if (i > 0 && j > 0) {
-                    if (i < array[i].length - 1 && j < array[j].length - 1) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count >= 3) {
-                            arrayResult[i][j] = true;
-                        }
-                        if (count < 3) {
-                            arrayResult[i][j] = false;
-                        }
-                    }
-                }
+                centerFalse();
             }
             if (array[i][j] === true) {
                 let count = 0;
                 // esquina arriba izquierda
-                if (i === 0 && j === 0) {
-                    if (array[i][j + 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i + 1][j] === true) {
-                        count += 1;
-                    }
-                    if (array[i + 1][j + 1] === true) {
-                        count += 1;
-                    }
-                    if (count > 3) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count < 2) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count === 2 || count === 3) {
-                        arrayResult[i][j] = true;
-                    }
-                }
+                upLeftTrue();
                 // esquina abajo izquierda
-                if (i === array[i].length - 1 && j === 0) {
-                    if (array[i][j + 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i - 1][j] === true) {
-                        count += 1;
-                    }
-                    if (array[i - 1][j + 1] === true) {
-                        count += 1;
-                    }
-                    if (count > 3) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count < 2) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count === 2 || count === 3) {
-                        arrayResult[i][j] = true;
-                    }
-                }
+                downLeftTrue();
                 // esquina arriba derecha
-                if (i === 0 && j === array[j].length - 1) {
-                    if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i + 1][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i + 1][j] === true) {
-                        count += 1;
-                    }
-                    if (count > 3) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count < 2) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count === 2 || count === 3) {
-                        arrayResult[i][j] = true;
-                    }
-                }
+                upRightTrue();
                 // esquina abajo derecha
-                if (i === array[i].length - 1 && j === array[j].length - 1) {
-                    if (array[i][j - 1] === true) {
-                        count += 1;
-                    }
-
-                    if (array[i - 1][j - 1] === true) {
-                        count += 1;
-                    }
-                    if (array[i - 1][j] === true) {
-                        count += 1;
-                    }
-                    if (count > 3) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count < 2) {
-                        arrayResult[i][j] = false;
-                    }
-                    if (count === 2 || count === 3) {
-                        arrayResult[i][j] = true;
-                    }
-                }
+                downRightTrue();
                 // fila arriba
-                if (i === 0 && j > 0) {
-                    if (j < array[j].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count > 3) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count < 2) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count === 2 || count === 3) {
-                            arrayResult[i][j] = true;
-                        }
-                    }
-                }
+                topTrue();
                 // columna derecha
-                if (i > 0 && j === array[j].length - 1) {
-                    if (i < array[i].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (count > 3) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count < 2) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count === 2 || count === 3) {
-                            arrayResult[i][j] = true;
-                        }
-                    }
-                }
+                rightTrue();
                 // fila abajo
-                if (i === array[i].length - 1 && j > 0) {
-                    if (j < array[j].length) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count > 3) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count < 2) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count === 2 || count === 3) {
-                            arrayResult[i][j] = true;
-                        }
-                    }
-                }
+                downTrue();
                 // columna izquierda
-                if (i > 0 && j === 0) {
-                    if (i < array[i].length) {
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count > 3) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count < 2) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count === 2 || count === 3) {
-                            arrayResult[i][j] = true;
-                        }
-                    }
-                }
+                leftTrue();
                 // centro
-                if (i > 0 && j > 0) {
-                    if (i < array[i].length - 1 && j < array[j].length - 1) {
-                        if (array[i][j - 1] === true) {
-                            count += 1;
-                        }
-                        debugger;
-                        if (array[i][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i + 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j - 1] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j] === true) {
-                            count += 1;
-                        }
-                        if (array[i - 1][j + 1] === true) {
-                            count += 1;
-                        }
-                        if (count > 3) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count < 2) {
-                            arrayResult[i][j] = false;
-                        }
-                        if (count === 2 || count === 3) {
-                            arrayResult[i][j] = true;
-                        }
-                    }
-                }
+                centerTrue();
             }
         }
     }
